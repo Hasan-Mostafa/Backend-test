@@ -17,12 +17,10 @@ class AppointmentController extends Controller
     {
         $user = auth('sanctum')->user();
 
-        $userAccessToken = "";
-        if($user->is_doctor) $userAccessToken =$user->google_access_token;  
-        else{
-            $doctor = User::where('id', $user->doctor_id)->first();
-            $userAccessToken = $doctor->google_access_token;
-        }
+        
+    
+        $userAccessToken =$user->google_access_token;  
+        
         // Initialize the Google API client
         $client = new GoogleClient();
         $client->setAccessToken($userAccessToken); // Use the access token obtained during authentication
